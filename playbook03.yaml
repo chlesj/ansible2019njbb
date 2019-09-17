@@ -1,0 +1,26 @@
+---
+- name: first play
+  hosts: futurama:!farnsworth
+  #  become: yes
+
+  tasks:
+          - name: learning more about copy
+            copy:
+                    content: "# inline source data to copy"
+                    dest: secondfloor.txt
+          - name: Install steam locomotive on ALL machines
+            become: yes
+            apt:
+                    name: sl
+                    state: present
+
+- name: second play
+  hosts: farnsworth
+
+  tasks:
+          - name: install steam locomotive on all RHEL matchines
+            yum:
+                    name: sl
+                    state: present
+            become: yes
+

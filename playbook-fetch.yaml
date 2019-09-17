@@ -1,0 +1,41 @@
+---
+- name: first play
+  hosts: futurama
+  vars:
+          batman:
+                  - Gordon
+                  - Barbra
+                  - Riddler
+                  - Joker
+                  - ClayFace
+          superman:
+                  - Lois
+                  - Doomsday
+                  - Zod
+
+  tasks:
+          - name: fetch secondfloor to localhost
+            fetch:
+                    src: secondfloor.txt
+                    dest: /tmp
+
+          - name: learn to print stuff to the screen
+            debug: 
+                # msg: "just want to print a msg to the screen"
+                #
+                var: item
+            loop: "{{ batman }}"
+
+          - name: trying to copy multiple files from remote system
+            shell: (cd ~; find . -maxdepth 1 -type f) | cut -d'/' -f2
+            register: files_to_copy
+
+          - name: temp dump of files_to_copy
+            debug:
+                    var: files_to_copy.stdout_lines
+
+          - name: grab a block of files defined by files_to_copy
+            fetch:
+                   src: "{{ item }}"
+                   dest: /tmp/
+            loop: "{{ files_to_copy.stdout_lines }}"

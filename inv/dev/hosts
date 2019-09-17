@@ -1,0 +1,11 @@
+[futurama]
+bender ansible_host=10.10.2.3 ansible_ssh_user=bender
+fry ansible_host=10.10.2.4 ansible_ssh_user=fry
+farnsworth ansible_host=10.10.2.6 ansible_ssh_user=farnsworth
+
+[ubuntuOS]
+bender ansible_host=10.10.2.3 ansible_ssh_user=bender
+fry ansible_host=10.10.2.4 ansible_ssh_user=fry
+
+[centOS]
+farnsworth ansible_host=10.10.2.6 ansible_ssh_user=farnsworth

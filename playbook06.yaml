@@ -1,0 +1,15 @@
+---
+- name: Learning when
+  hosts: futurama:!farnsworth
+  gather_facts: no
+
+  tasks:
+          - name: given bool_var = True
+            debug:
+                    msg: "It would appear as if bool_vas was given a value of TRUE"
+            when: bool_var
+
+          - name: given bool_var = False
+            debug:
+                    msf: "Dont panic"
+            when: not bool_var

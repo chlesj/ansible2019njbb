@@ -1,0 +1,23 @@
+---
+- name: first play
+  hosts: futurama
+
+  tasks:
+          - name: learning more about copy
+            copy:
+                    content: "# inline source data to copy"
+                    dest: secondfloor.txt
+          - name: Install steam locomotive on ALL machines
+            become: yes
+            apt:
+                    name: sl
+                    state: present
+            when: ansible_distribution == "Ubuntu"
+
+          - name: Install steam locomotive on ALL CENTOS machines
+            become: yes
+            yum:
+                    name: sl
+                    state: present
+            when: ansible_distribution == "CentOS"
+

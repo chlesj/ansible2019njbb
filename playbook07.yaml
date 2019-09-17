@@ -1,0 +1,9 @@
+---
+- name: download image
+  hosts: futurama:&ubuntuOS
+
+  tasks:
+        - name: download image via API
+          get_url:
+                  url: http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
+                  dest: /tmp/cirrOS_image
