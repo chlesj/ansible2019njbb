@@ -1,0 +1,22 @@
+---
+- name: Learning about template module
+  hosts: futurama:!centOS
+
+  vars:
+          ship_name: Bessie
+          ship_type: intergallactic
+          engines: dark matter
+          fuel: 0
+          price: 500
+
+  tasks:
+           - name: create directory for config file
+             file: 
+               state: directory
+               path: ~/config
+
+           - name: complete configuration file
+             template: 
+               src: templates/ship.cfg.j2
+               dest: ~/config/ship.cfg
+             when: ship_name is defined

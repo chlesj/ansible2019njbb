@@ -1,0 +1,16 @@
+---
+- name: playbook with lineinfile
+  hosts: localhost
+
+  vars:
+          fileloc: "~/sys.log"
+
+  tasks:
+          - name: insert a line into {{ fileloc }}
+            lineinfile:
+                    path: "{{ fileloc }}"
+                    backup: yes
+                    regex: '^Sep\s\d\d?\s\d{2}:\d{2}:\d{2}'
+                    line: "ANSIBLE MATCHED THIS LINE. Redacted by ansible"
+
+

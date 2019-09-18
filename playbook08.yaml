@@ -1,0 +1,10 @@
+---
+- name:  pull gitrepo from github and deploy on remote hosts
+  hosts: futurama
+
+  tasks:
+          - name: pull from github repo
+            git:
+                    repo: https://github.com/chlesj/ansible2019njbb.git
+                    dest: ~/archive/
+

@@ -1,0 +1,14 @@
+---
+- name: playbook with lineinfile
+  hosts: localhost
+
+  vars:
+          fileloc: "~/sys.log"
+
+  tasks:
+          - name: edit a file using replace module
+            replace:
+                    path: "{{ fileloc }}"
+                    backup: yes
+                    regexp: 'Sep.*(ansible)-\d{3}-(\S+)\s(.*)$'
+                    replace: '\1-\2-\3'
