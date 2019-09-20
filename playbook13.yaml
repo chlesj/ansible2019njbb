@@ -1,0 +1,45 @@
+---
+- name: loops
+  hosts: localhost
+  vars:
+        my_list:
+                - A hyphen is an entry in a list
+                - so this is the second item
+                  whereas this is the thrid
+                - the item var is always replaced by an item from the loops list
+        my_list2:
+                - here is another list
+                - use quote or don't use quotes
+                - single guuotes or doule quotes work
+        jarlist: [1,1,1,1,1,5]
+        repeatlist: [1,1,1,1,2,2,2,2,9,9,9,9]
+        repeat2list: [5,5,5,5,5,5,5,6,7]
+        complexlist: [6,7,8,[9,10,11,12],87]     
+
+  tasks:
+         - name: using debug to test loop
+           debug:
+                   msg: "foo:  {{ item }}"
+           loop:
+                   #                   "{{ my_list }}"
+                   #                   "{{ my_list2 }}"
+                   "{{ my_list | union(my_list2) }}"
+
+         - name: display the min value of jarlist
+           debug:
+                   msg: "the min value of jarlist is: {{jarlist | min }}"
+         - name: display the max value of jarlist
+           debug:
+                   msg: "the max value of jarlist is: {{ jarlist | max }}"
+         - name: transfor the complex list into a flat list
+           debug:
+                   msg: " Before complex list was: {{ complexlist }} but now it is {{ complexlist | flatten }}"
+         - name: pull the unique values from a list
+           debug:
+                   msg: "unique values of repeatlist: {{ repeatlist | unique }}"
+         - name: produce a union of two lists
+           debug:
+                   msg: "the untion of repeatlist and repeat2list : {{ repeatlist | union(repeat2list) }}"
+         - name: produce the diff of two lists
+           debug:
+                   msg: "The diff of repeatlist and repeat2list is: {{ repeatlist | difference(repeat2list) }}"

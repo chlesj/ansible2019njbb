@@ -1,0 +1,13 @@
+---
+- name: flearning about vaults
+  hosts: futurama
+  vars_files:
+          - vars/creds.yaml
+  tasks:
+          - name: print out values in creds.yaml
+            debug:
+                    var: ansible_ssh_pass
+
+          - name: print out more values in creds.yaml
+            debug:
+                    var: vzw_users

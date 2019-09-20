@@ -1,0 +1,22 @@
+---
+- name: ansible and restul interfaces
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+          astros: "{{ lookup('url', 'http://api.open-notify.org/astros.json') }}"
+
+  tasks:
+          - name: quick iss api checkup
+            loop:
+                    "{{ astros.people }}"
+            debug:
+                    msg: "today on the ISS is: {{ item.name }}"
+
+          - name: create a new list with ansible of astro names
+            set_fact: 
+                    spacecowboys: "{{ astros.people|map(attribute='name')|list }}"
+
+          - name: did it work?
+            debug:
+                    msg: "{{ spacecowboys }}"
